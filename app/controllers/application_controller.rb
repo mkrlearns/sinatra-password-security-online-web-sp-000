@@ -11,12 +11,7 @@ class ApplicationController < Sinatra::Base
 	get("/") {erb :index}
 	get("/signup") {erb :signup}
 	get("/login") {erb :login}
-	get ("/success") do
-		if logged_in?
-			erb :success
-		end
-		redirect "/login"
-	end
+	get("/success") {erb :success if logged_in?; redirect "/login"}
 	get("/failure") {erb :failure}
 	get("/logout") {session.clear; redirect "/"}
 
