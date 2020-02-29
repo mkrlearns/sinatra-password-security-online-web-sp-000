@@ -15,8 +15,9 @@ class ApplicationController < Sinatra::Base
 	get("/failure") {erb :failure}
 	get("/logout") {session.clear; redirect "/"}
 
-	post("/signup") {user = User.new(:username => params[:username], :password => params[:password])}
-
+	post "/signup" do
+		#your code here!
+	end
 
 
 
