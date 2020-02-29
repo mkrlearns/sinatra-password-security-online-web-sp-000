@@ -16,11 +16,13 @@ class ApplicationController < Sinatra::Base
 	get("/logout") {session.clear; redirect "/"}
 
 	post "/signup" do
-		user = User.new(:username=>params[:username], :password=>params[:password])
+	  user = User.new(:username => params[:username], :password => params[:password])
+	 
 	  if user.save
-			redirect "/login"
-		end
-		redirect "/failure"
+	    redirect "/login"
+	  else
+	    redirect "/failure"
+	  end
 	end
 
 	post "/login" do
