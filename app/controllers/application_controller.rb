@@ -9,16 +9,17 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get("/") {erb :index}
-
 	get("/signup") {erb :signup}
+	get("/login") {erb :login}
+	get("/logout") {session.clear; redirect "/"}
+	get("/success") {redirect "/login" if !logged_in?; erb :success}
+	get("/failure") {erb :failure}
 
 	post "/signup" do
 		user = User.new(username: params[:username], password: params[:password])
 		redirect "/login" if user.save
 		redirect "/failure"
 	end
-
-	get("/login") {erb :login}
 
 	post "/login" do
 		user = User.find_by(username: params[:username])
@@ -28,12 +29,6 @@ class ApplicationController < Sinatra::Base
 		end
 		redirect "failure"
 	end
-
-	get("/success") {redirect "/login" if !logged_in?; erb :success}
-
-	get("/failure") {erb :failure}
-
-	get("/logout") {session.clear; redirect "/"}
 
 	helpers do
 		def logged_in?() !!session[:user_id] end
