@@ -47,9 +47,7 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
-	get "/failure" do
-		erb :failure
-	end
+	get("/failure") {erb :failure}
 
 	get("/logout") {session.clear; redirect "/"}
 
