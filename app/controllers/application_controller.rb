@@ -25,9 +25,7 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
-	get "/login" do
-		erb :login
-	end
+	get("/login") {erb :login}
 
 	post "/login" do
 		user = User.find_by(username: params[:username])
