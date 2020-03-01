@@ -8,13 +8,9 @@ class ApplicationController < Sinatra::Base
 		set :session_secret, "password_security"
 	end
 
-	get "/" do
-		erb :index
-	end
+	get("/") {erb :index}
 
-	get "/signup" do
-		erb :signup
-	end
+	get("/signup") {erb :signup}
 
 	post "/signup" do
 		user = User.new(username: params[:username], password: params[:password])
